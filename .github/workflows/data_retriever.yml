@@ -1,1 +1,34 @@
+name: Data retriever
 
+on:
+  
+  workflow_dispatch:
+  
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '5 1 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get data 
+      run: curl -X POST https://user-api-leitos:aQbLL3ZStaTr38tj@elastic-leitos.saude.gov.br/leito_ocupacao/_search?size=10000 >> occupation.json
+                
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git status
+        git add .
+        git commit -m "Update data" -a
+       
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch:  'master'
+        force:  true 
+        github_token: ${{ secrets.GITHUB_TOKEN }}
