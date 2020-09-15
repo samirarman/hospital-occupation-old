@@ -16,7 +16,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Get data 
-      run: curl -X POST https://user-api-leitos:aQbLL3ZStaTr38tj@elastic-leitos.saude.gov.br/leito_ocupacao/_search?size=10000 >> occupation.json
+      run: |
+        curl -X POST https://user-api-leitos:aQbLL3ZStaTr38tj@elastic-leitos.saude.gov.br/leito_ocupacao/_search?size=10000 >> occupation.json
+        echo \n >> occupation.json
                 
     - name: Commit files
       run: |
