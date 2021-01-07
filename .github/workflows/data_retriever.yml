@@ -17,7 +17,7 @@ jobs:
 
     - name: Get data 
       run: |
-        curl -X POST https://user-api-leitos:aQbLL3ZStaTr38tj@elastic-leitos.saude.gov.br/leito_ocupacao/_search?size=10000 -w "\n" >> occupation2.json
+        curl -X POST https://user-api-leitos:aQbLL3ZStaTr38tj@elastic-leitos.saude.gov.br/leito_ocupacao/_search?size=10000 -w "\n" >> occupation3.json
                 
     - name: Commit files
       run: |
